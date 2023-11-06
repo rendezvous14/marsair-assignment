@@ -4,7 +4,8 @@
   "description": "Mars Airlines Assignment",
   "main": "index.js",
   "scripts": {
-    "test": "npx playwright test",
+    "test": "npx playwright test tests/searching",
+    "trace": "npx playwright test tests/searching --trace on",
     "report": "npx playwright show-report"
   },
   "repository": {
