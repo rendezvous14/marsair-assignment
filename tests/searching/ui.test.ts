@@ -1,110 +1,72 @@
 import { test, expect } from '@playwright/test'
 import { HomePage } from '../../src/pages/home.page'
+import { SearchResultPage } from '../../src/pages/searchResult.page'
 
 test.describe.parallel('Mars Airlines: Links back to home', async () => {
   test.beforeEach(async ({ page }) => {
     const homePage = new HomePage(page)
+    // go to home page
     await homePage.goToHomePage()
+    // ensure the home page displays
+    await homePage.homePageDisplays()
   })
 
   test('Click "Back" button on the search result window', async ({ page }) => {
-    // Enter the valid Departing and Returning date
-    await page.getByLabel('Departing').selectOption('0')
-    await page.getByLabel('Returning').selectOption('0')
-    await page.getByLabel('Promotional Code').focus()
-    await page.getByLabel('Promotional Code').fill('ABC')
-    await page.getByRole('button', { name: 'Search' }).click()
+    const homePage = new HomePage(page)
+    const searchResultPage = new SearchResultPage(page)
 
-    await expect(
-      page.getByRole('heading', { name: 'Search Results' })
-    ).toBeVisible()
-    await expect(
-      page.getByText('Sorry, there are no more seats available.')
-    ).toBeVisible()
+    // fil in the search form
+    await homePage.fillInSearchForm('july', 'december')
+    await homePage.clickSearchButton()
 
-    await page.getByRole('link', { name: 'Back' }).click()
+    // ensure the search result page displays
+    await searchResultPage.searchResultDisplays()
+    // click back button
+    await searchResultPage.clickBackButton()
 
-    await expect(
-      page.getByRole('heading', { name: 'Welcome to MarsAir!' })
-    ).toBeVisible()
-
-    await expect(
-      page.getByRole('heading', {
-        name: 'Book a ticket to the red planet now!',
-      })
-    ).toBeVisible()
+    // ensure the home page displays
+    await homePage.homePageDisplays()
   })
 
   test('Click the "Mars Air" Logo on search result page', async ({ page }) => {
-    // Enter the valid Departing and Returning date
-    await page.getByLabel('Departing').selectOption('0')
-    await page.getByLabel('Returning').selectOption('0')
-    await page.getByLabel('Promotional Code').focus()
-    await page.getByLabel('Promotional Code').fill('ABC')
-    await page.getByRole('button', { name: 'Search' }).click()
+    const homePage = new HomePage(page)
+    const searchResultPage = new SearchResultPage(page)
 
-    await expect(
-      page.getByRole('heading', { name: 'Search Results' })
-    ).toBeVisible()
-    await expect(
-      page.getByText('Sorry, there are no more seats available.')
-    ).toBeVisible()
+    // fil in the search form
+    await homePage.fillInSearchForm('july', 'december')
+    await homePage.clickSearchButton()
 
+    // ensure the search result page displays
+    await searchResultPage.searchResultDisplays()
     // click on logo
-    await page.getByRole('link', { name: 'MarsAir' }).click()
+    await searchResultPage.clickLogo()
 
-    await expect(
-      page.getByRole('heading', { name: 'Welcome to MarsAir!' })
-    ).toBeVisible()
-
-    await expect(
-      page.getByRole('heading', {
-        name: 'Book a ticket to the red planet now!',
-      })
-    ).toBeVisible()
+    // ensure the home page displays
+    await homePage.homePageDisplays()
   })
 
   test('Click the back navigation on the browswer', async ({ page }) => {
-    // Enter the valid Departing and Returning date
-    await page.getByLabel('Departing').selectOption('0')
-    await page.getByLabel('Returning').selectOption('0')
-    await page.getByLabel('Promotional Code').focus()
-    await page.getByLabel('Promotional Code').fill('ABC')
-    await page.getByRole('button', { name: 'Search' }).click()
+    const homePage = new HomePage(page)
+    const searchResultPage = new SearchResultPage(page)
 
-    await expect(
-      page.getByRole('heading', { name: 'Search Results' })
-    ).toBeVisible()
-    await expect(
-      page.getByText('Sorry, there are no more seats available.')
-    ).toBeVisible()
+    // fil in the search form
+    await homePage.fillInSearchForm('july', 'december')
+    await homePage.clickSearchButton()
 
-    // click on logo
+    // ensure the search result page displays
+    await searchResultPage.searchResultDisplays()
+    // click back navigation on browser
     await page.goBack()
 
-    await expect(
-      page.getByRole('heading', { name: 'Welcome to MarsAir!' })
-    ).toBeVisible()
-
-    await expect(
-      page.getByRole('heading', {
-        name: 'Book a ticket to the red planet now!',
-      })
-    ).toBeVisible()
+    // ensure the home page displays
+    await homePage.homePageDisplays()
   })
 
   test('Click the "Mars Air" Logo on home page', async ({ page }) => {
+    const homePage = new HomePage(page)
     // click on logo
-    await page.getByRole('link', { name: 'MarsAir' }).click()
-
-    await expect(
-      page.getByRole('heading', { name: 'Welcome to MarsAir!' })
-    ).toBeVisible()
-
-    await expect(
-      page.getByRole('heading', {
-        name: 'Book a ticket to the red planet now!',
-      })
-    ).toBeVisible()
+    await homePage.clickLogo()
+    // ensure the home page displays
+    await homePage.homePageDisplays()
   })
 })
