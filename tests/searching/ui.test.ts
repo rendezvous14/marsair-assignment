@@ -1,21 +1,10 @@
 import { test, expect } from '@playwright/test'
-const base_url = process.env.base_url
+import { HomePage } from '../../src/pages/home.page'
 
 test.describe.parallel('Mars Airlines: Links back to home', async () => {
   test.beforeEach(async ({ page }) => {
-    // open page
-    await page.goto(`${base_url}`)
-
-    // Ensure the landing page is ready
-    await expect(
-      page.getByRole('heading', { name: 'Welcome to MarsAir!' })
-    ).toBeVisible()
-
-    await expect(
-      page.getByRole('heading', {
-        name: 'Book a ticket to the red planet now!',
-      })
-    ).toBeVisible()
+    const homePage = new HomePage(page)
+    await homePage.goToHomePage()
   })
 
   test('Click "Back" button on the search result window', async ({ page }) => {
