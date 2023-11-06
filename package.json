@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "npx playwright test tests/searching",
-    "trace": "npx playwright test tests/searching --trace on",
+    "test-ui": "npx playwright test tests/searching --ui",
     "report": "npx playwright show-report"
   },
   "repository": {
