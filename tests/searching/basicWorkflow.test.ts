@@ -34,14 +34,14 @@ test.describe.parallel('Basic search workflow', async () => {
     await searchResultPage.seatsAvailableInfoDisplays()
   })
 
-  test('User can see no more seats available when seats are unavailable.', async ({
+  test('Users can see no more seats available when seats are unavailable.', async ({
     page,
   }) => {
     const homePage = new HomePage(page)
     const searchResultPage = new SearchResultPage(page)
 
     // get options value
-    const dpOption = options['July'].toString()
+    const dpOption = options['December'].toString()
     const rtOption = options['July (two years from now)'].toString()
 
     // fil in the search form
@@ -53,7 +53,7 @@ test.describe.parallel('Basic search workflow', async () => {
     await searchResultPage.seatsUnavailableInfoDisplays()
   })
 
-  test('User can this schedule is not possible message', async ({ page }) => {
+  test('Users can this schedule is not possible message', async ({ page }) => {
     const homePage = new HomePage(page)
     const searchResultPage = new SearchResultPage(page)
 
