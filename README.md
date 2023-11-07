@@ -2,9 +2,16 @@
 
 Mars Airlines Assignment
 
-End-to-end test powered by playwright with typescript
+End-to-end testing powered by [playwright](https://github.com/microsoft/playwright) with typescript
 
 ## Setup
+
+### 0. Require Nodejs to setup this project
+
+Recommended to use asdf-vm and plugin NodeJS. See more detail by this link [asdf-vm-nodejs](https://asdf-vm.com/guide/getting-started.html#install-the-plugin)
+```
+asdf install nodejs 20.5.1
+```
 
 ### 1. Clone the project
 
@@ -41,7 +48,9 @@ Use VS Code with [Playwright Test for VSCode](https://playwright.dev/docs/gettin
 ```
 $ npm run test-ui
 ```
+
 #### output
+
 ![npm_run_test-ui](./docs/img/npm_run_test-ui.png)
 
 ### playwright run headless mode
@@ -49,7 +58,9 @@ $ npm run test-ui
 ```
 $ npm run test
 ```
+
 #### output
+
 ![npm_run_test](./docs/img/npm_run_test.jpg)
 
 ### playwright generate html report
@@ -59,8 +70,11 @@ $ npm run report
 ```
 
 ## Test structures
+
 ### tests directory
+
 keep all test cases which are separated by features
+
 ```
 tests
 └── searching
@@ -68,7 +82,9 @@ tests
     ├── promotionCode.test.ts
     └── ui.test.ts
 ```
+
 ### src directory
+
 keep all the resources e.g. constants, services, pages (POM), utils, helper
 
 ```
