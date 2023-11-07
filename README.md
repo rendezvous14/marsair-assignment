@@ -57,3 +57,25 @@ $ npm run test
 ```
 $ npm run report
 ```
+
+## Test structures
+### tests directory
+keep all test cases which are separated by features
+```
+tests
+└── searching
+    ├── basicWorkflow.test.ts
+    ├── promotionCode.test.ts
+    └── ui.test.ts
+```
+### src directory
+keep all the resources e.g. constants, services, pages (POM), utils, helper
+
+```
+src
+├── constants
+│   └── searchOptions.ts
+└── pages
+    ├── home.page.ts
+    └── searchResult.page.ts
+```
