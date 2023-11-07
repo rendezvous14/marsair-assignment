@@ -37,23 +37,7 @@ export class HomePage {
     await expect(this.getSecondHeading).toBeVisible()
   }
 
-  async fillInSearchForm(
-    departing: string = '',
-    returning: string = '',
-    promotion: string = ''
-    /* options
-        Select...
-        July
-        December
-        July (next year)
-        December (next year)
-        July (two years from now)
-        December (two years from now)
-    */
-  ) {
-    const dpOption = dateOption(departing)
-    const rtOption = dateOption(returning)
-
+  async fillInSearchForm(dpOption: string = '', rtOption: string = '') {
     await this.getDepartingOptions.selectOption(dpOption)
     await this.getReturningOptions.selectOption(rtOption)
   }
@@ -64,25 +48,6 @@ export class HomePage {
 
   async clickLogo() {
     await this.getSearchResultLogo.click()
-  }
-}
-
-const dateOption = (value: string) => {
-  switch (value.toLowerCase()) {
-    case 'july':
-      return '0'
-    case 'december':
-      return '1'
-    case 'July (next year)':
-      return '2'
-    case 'December (next year)':
-      return '3'
-    case 'July (two years from now)':
-      return '4'
-    case 'December (two years from now)':
-      return '5'
-    default:
-      return ''
   }
 }
 

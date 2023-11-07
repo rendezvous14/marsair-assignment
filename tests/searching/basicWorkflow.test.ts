@@ -1,10 +1,10 @@
-import { test } from '@playwright/test'
+import { test, expect } from '@playwright/test'
 import { HomePage } from '../../src/pages/home.page'
 import { SearchResultPage } from '../../src/pages/searchResult.page'
 //constants for dropdown options
 import { searchOptions } from '../../src/constants/searchOptions'
 
-test.describe.parallel('Links back to home', async () => {
+test.describe.parallel('Basic search workflow', async () => {
   const options = searchOptions // create obj options for testing
 
   test.beforeEach(async ({ page }) => {
@@ -15,7 +15,9 @@ test.describe.parallel('Links back to home', async () => {
     await homePage.homePageDisplays()
   })
 
-  test('Click "Back" button on the search result window', async ({ page }) => {
+  test('Users can view reservation information when seats are available.', async ({
+    page,
+  }) => {
     const homePage = new HomePage(page)
     const searchResultPage = new SearchResultPage(page)
 
@@ -27,62 +29,44 @@ test.describe.parallel('Links back to home', async () => {
     await homePage.fillInSearchForm(dpOption, rtOption)
     await homePage.clickSearchButton()
 
-    // ensure the search result page displays
+    // expect displays seats available info
     await searchResultPage.searchResultDisplays()
-    // click back button
-    await searchResultPage.clickBackButton()
-
-    // ensure the home page displays
-    await homePage.homePageDisplays()
+    await searchResultPage.seatsAvailableInfoDisplays()
   })
 
-  test('Click the "Mars Air" Logo on search result page', async ({ page }) => {
+  test('User can see no more seats available when seats are unavailable.', async ({
+    page,
+  }) => {
     const homePage = new HomePage(page)
     const searchResultPage = new SearchResultPage(page)
 
     // get options value
     const dpOption = options['July'].toString()
-    const rtOption = options['December (two years from now)'].toString()
+    const rtOption = options['July (two years from now)'].toString()
 
     // fil in the search form
     await homePage.fillInSearchForm(dpOption, rtOption)
     await homePage.clickSearchButton()
 
-    // ensure the search result page displays
+    // expect displays seats unavailable info
     await searchResultPage.searchResultDisplays()
-    // click on logo
-    await searchResultPage.clickLogo()
-
-    // ensure the home page displays
-    await homePage.homePageDisplays()
+    await searchResultPage.seatsUnavailableInfoDisplays()
   })
 
-  test('Click the back navigation on the browswer', async ({ page }) => {
+  test('User can this schedule is not possible message', async ({ page }) => {
     const homePage = new HomePage(page)
     const searchResultPage = new SearchResultPage(page)
 
     // get options value
-    const dpOption = options['July'].toString()
-    const rtOption = options['December (two years from now)'].toString()
+    const dpOption = options['July (next year)'].toString()
+    const rtOption = options['December (next year)'].toString()
 
     // fil in the search form
     await homePage.fillInSearchForm(dpOption, rtOption)
     await homePage.clickSearchButton()
 
-    // ensure the search result page displays
+    // expect displays seats unavailable info
     await searchResultPage.searchResultDisplays()
-    // click back navigation on browser
-    await page.goBack()
-
-    // ensure the home page displays
-    await homePage.homePageDisplays()
-  })
-
-  test('Click the "Mars Air" Logo on home page', async ({ page }) => {
-    const homePage = new HomePage(page)
-    // click on logo
-    await homePage.clickLogo()
-    // ensure the home page displays
-    await homePage.homePageDisplays()
+    await searchResultPage.invalidScheduleInfoDisplay()
   })
 })
