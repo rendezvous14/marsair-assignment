@@ -1,0 +1,30 @@
+{
+  "name": "marsair-assignment",
+  "version": "1.0.0",
+  "description": "Mars Airlines Assignment",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx playwright test tests/searching",
+    "test-ui": "npx playwright test tests/searching --ui",
+    "report": "npx playwright show-report"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rendezvous14/marsair-assignment.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rendezvous14/marsair-assignment/issues"
+  },
+  "homepage": "https://github.com/rendezvous14/marsair-assignment#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.39.0",
+    "@types/node": "^20.8.10",
+    "dotenv": "^16.3.1"
+  },
+  "dependencies": {
+    "npm": "^10.2.1"
+  }
+}
