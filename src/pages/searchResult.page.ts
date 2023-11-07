@@ -9,6 +9,7 @@ export class SearchResultPage {
   readonly getSearchResultSeatsUnavailable: Locator
   readonly getSearchResultInvalidSchedule: Locator
   readonly getSearchResultBookingInfo: Locator
+  readonly getSearchResultPromotionCodeInfo: Locator
 
   constructor(page: Page) {
     this.page = page
@@ -26,6 +27,9 @@ export class SearchResultPage {
     )
     this.getSearchResultBookingInfo = page.getByText(
       'Call now on 0800 MARSAIR to book!'
+    )
+    this.getSearchResultPromotionCodeInfo = page.locator(
+      `#content > p.promo_code`
     )
   }
 
@@ -54,5 +58,9 @@ export class SearchResultPage {
 
   async invalidScheduleInfoDisplay() {
     await expect(this.getSearchResultInvalidSchedule).toBeVisible()
+  }
+
+  async promotionText() {
+    return await this.getSearchResultPromotionCodeInfo.innerText()
   }
 }

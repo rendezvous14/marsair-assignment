@@ -9,6 +9,7 @@ export class HomePage {
   readonly getPromotionalInput: Locator
   readonly getSearchButton: Locator
   readonly getSearchResultLogo: Locator
+  readonly getPromotionInput: Locator
 
   constructor(page: Page) {
     this.page = page
@@ -23,6 +24,8 @@ export class HomePage {
     this.getPromotionalInput = page.getByLabel('Promotional Code')
     this.getSearchButton = page.getByRole('button', { name: 'Search' })
     this.getSearchResultLogo = page.getByRole('link', { name: 'MarsAir' })
+
+    this.getPromotionInput = page.getByLabel('Promotional Code')
   }
 
   async goToHomePage() {
@@ -48,6 +51,10 @@ export class HomePage {
 
   async clickLogo() {
     await this.getSearchResultLogo.click()
+  }
+
+  async fillInPromotionCode(code: string = '') {
+    await this.getPromotionalInput.fill(code)
   }
 }
 
